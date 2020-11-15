@@ -16,14 +16,15 @@ public class Game extends Canvas implements Runnable {
 
     private Handler handler;
     private HUD hud;
+    private Spawn spawner;
 
     public Game() {
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
         new Window(WIDTH, HEIGHT, "ORCHI VS CAVALIERI!", this);
         hud = new HUD();
+        spawner = new Spawn(handler, hud);
         handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2, ID.Player, handler));
-        handler.addObject(new BasicEnemy(WIDTH/2 - 32, HEIGHT/2, ID.BasicEnemy, handler));
     }
 
     public static void main(String[] args) {
@@ -84,6 +85,7 @@ public class Game extends Canvas implements Runnable {
     private void tick() { 
         handler.tick();
         hud.tick();
+        spawner.tick();
     }
 
 
