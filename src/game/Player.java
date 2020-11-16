@@ -17,8 +17,8 @@ public class Player extends GameObject {
         x += velX;
         y += velY;
 
-        x = Game.clamp(x, 0, Game.WIDTH - 45);
-        y = Game.clamp(y, 0, Game.HEIGHT - 70);
+        x = Game.clamp((int)x, 0, Game.WIDTH - 45);
+        y = Game.clamp((int)y, 0, Game.HEIGHT - 70);
 
         handler.addObject(new Trail(x, y, ID.Trail, handler, Color.white, 32, 32, 0.1f));
 
@@ -31,11 +31,11 @@ public class Player extends GameObject {
          * g2d.draw(getBounds());
          */
         g.setColor(Color.white);
-        g.fillRect(x, y, 32, 32);
+        g.fillRect((int)x, (int)y, 32, 32);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 32, 32);
+        return new Rectangle((int)x, (int)y, 32, 32);
     }
 
     private void collision() {
