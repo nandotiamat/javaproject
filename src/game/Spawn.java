@@ -18,14 +18,16 @@ public class Spawn {
         if (scoreKeep >= 100) {
             scoreKeep = 0;
             hud.setLevel(hud.getLevel() + 1);
+            
             if (hud.getLevel() == 2) {
-                handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH -50), r.nextInt(Game.HEIGHT -50), ID.BasicEnemy, handler));
+                handler.addObject(new BossEnemy((Game.WIDTH / 2) - 48, -120, ID.BossEnemy, handler));
             }
             else if (hud.getLevel() == 3) {
                 handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH -50), r.nextInt(Game.HEIGHT -50), ID.FastEnemy, handler));
                 handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH -50), r.nextInt(Game.HEIGHT -50), ID.FastEnemy, handler));
                 handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH -50), r.nextInt(Game.HEIGHT -50), ID.SmartEnemy, handler));
             }
+            
         }
     }
 }
