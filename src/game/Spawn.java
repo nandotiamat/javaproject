@@ -12,6 +12,26 @@ public class Spawn {
         this.handler = handler;
         this.hud = hud;
     }
+    
+    private void spawnBasicEnemy(int n) {
+        for (int i = 0 ; i < n; i++) 
+            handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - BasicEnemy.width), r.nextInt(Game.HEIGHT - BasicEnemy.height), ID.BasicEnemy, handler));
+    }
+
+    private void spawnFastEnemy(int n) {
+        for (int i = 0; i<n; i++)
+            handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH - FastEnemy.width), r.nextInt(Game.HEIGHT - FastEnemy.height), ID.FastEnemy, handler));
+    }
+
+    private void spawnSmartEnemy(int n) {
+        for (int i = 0; i<n; i++) 
+            handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - SmartEnemy.width), r.nextInt(Game.HEIGHT - SmartEnemy.height), ID.SmartEnemy, handler));
+    }
+
+    private void spawnBossEnemy(int n) {
+        for (int i = 0; i<n; i++) 
+            handler.addObject(new BossEnemy(Game.WIDTH/2 - BossEnemy.width, - BossEnemy.height, ID.BossEnemy, handler));
+    }
 
     public void tick() {
         scoreKeep++;
@@ -20,12 +40,33 @@ public class Spawn {
             hud.setLevel(hud.getLevel() + 1);
             
             if (hud.getLevel() == 2) {
-                handler.addObject(new BossEnemy((Game.WIDTH / 2) - 48, -120, ID.BossEnemy, handler));
+                spawnBasicEnemy(1);
             }
             else if (hud.getLevel() == 3) {
-                handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH -50), r.nextInt(Game.HEIGHT -50), ID.FastEnemy, handler));
-                handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH -50), r.nextInt(Game.HEIGHT -50), ID.FastEnemy, handler));
-                handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH -50), r.nextInt(Game.HEIGHT -50), ID.SmartEnemy, handler));
+                spawnFastEnemy(2); 
+            }
+            else if (hud.getLevel() == 4) {
+                spawnSmartEnemy(1);
+            }
+            else if (hud.getLevel() == 5) {
+                spawnBasicEnemy(2);
+            }
+            else if (hud.getLevel() == 6) {
+                spawnSmartEnemy(1);
+            }
+            else if (hud.getLevel() == 7) {
+                spawnFastEnemy(1);
+                spawnSmartEnemy(2);
+            }
+            else if (hud.getLevel() == 8) {
+                spawnBasicEnemy(1); 
+            }
+            else if (hud.getLevel() == 9) {
+                spawnSmartEnemy(2);
+            }
+            else if (hud.getLevel() == 10) {
+                handler.clearEnemies();
+                spawnBossEnemy(1);
             }
             
         }

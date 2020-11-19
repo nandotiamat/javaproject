@@ -2,10 +2,10 @@ package game;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.util.Random;
 
 public class BossEnemy extends GameObject {
 
@@ -13,6 +13,8 @@ public class BossEnemy extends GameObject {
     private int timer;
     private int timer2;
     private BufferedImage img;
+    private Random r = new Random();
+    public static final int width = 200, height = 200;
 
     public BossEnemy(int x, int y, ID id, Handler handler) {
         super(x, y, id);
@@ -21,9 +23,8 @@ public class BossEnemy extends GameObject {
         velX = 0;
         timer = 100;
         timer2 = 100;
-        System.out.println(System.getProperty("user.dir"));
         try {
-            img = ImageIO.read(new File("src/game/sarracino.png"));
+            img = ImageIO.read(new File("src/img/sarracino.jpeg"));
         } catch (Exception e) {
             System.out.println("Cant load img");
         }
@@ -38,23 +39,25 @@ public class BossEnemy extends GameObject {
         }
         if (timer2 >= 0) {
             timer2--;
-            if (timer2 == 0) velX = 2;
+            if (timer2 == 0) {
+                velX = 2;
+            }
+        } else {
+            int spawn = r.nextInt(10);
+            if (spawn == 0 ) handler.addObject(new BossEnemyBullet((int) (x + width/2), (int) (y+height/2), ID.BasicEnemy, handler));
         }
         
-        if (x <= 0 || x > Game.WIDTH - 64)
+        if (x <= 0 || x > Game.WIDTH - width)
             velX *= -1;
 
-        //handler.addObject(new Trail(x, y, ID.Trail, handler, Color.red, 64, 64, 0.1f));
     }
 
     public void render(Graphics g) {
-        g.drawImage(img, (int) x, (int) y, 100, 100, null);
-        //g.setColor(Color.red);
-        //g.fillRect((int) x, (int) y, 64, 64);
+        g.drawImage(img, (int) x, (int) y, width, height, null);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int)x ,(int) y, 64, 64);
+        return new Rectangle((int)x ,(int) y, width, height);
     }
     
 }

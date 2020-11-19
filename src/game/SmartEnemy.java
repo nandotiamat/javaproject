@@ -8,7 +8,8 @@ public class SmartEnemy extends GameObject {
 
     private Handler handler;
     private GameObject player;
-
+    public static final int width = 16;
+    public static final int height = 16;
     public SmartEnemy(int x, int y, ID id, Handler handler) {
         super(x, y, id);
         this.handler = handler;
@@ -34,16 +35,16 @@ public class SmartEnemy extends GameObject {
         velX = (-1.0f/distance) * diffX;
         velY = (-1.0f/distance) * diffY;
 
-        handler.addObject(new Trail(x, y, ID.Trail, handler, Color.yellow, 16, 16, 0.1f));
+        handler.addObject(new Trail(x, y, ID.Trail, handler, Color.yellow, width, height, 0.1f));
     }
 
     public void render(Graphics g) {
         g.setColor(Color.yellow);
-        g.fillRect((int)x, (int)y, 16, 16);
+        g.fillRect((int)x, (int)y, width, height);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int)x,(int)y, 16, 16);
+        return new Rectangle((int)x,(int)y, width, height);
     }
     
 }
