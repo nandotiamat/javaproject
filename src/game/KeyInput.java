@@ -59,7 +59,14 @@ public class KeyInput extends KeyAdapter {
                 }
             }
         }
-        if ( key == KeyEvent.VK_ESCAPE ) System.exit(0);
+        if ( key == KeyEvent.VK_ESCAPE ) {
+            if (Game.gameState == STATE.Menu) {
+                Game.gameState = STATE.Game;
+            }
+            else {
+                Game.gameState = STATE.Menu;
+            }
+        }
     }
 
     public void keyReleased(KeyEvent e) {
